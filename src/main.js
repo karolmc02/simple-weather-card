@@ -204,7 +204,7 @@ class SimpleWeatherCard extends LitElement {
       this.custom[attr] && this.custom[attr].unit
         ? this.custom[attr]
         : INFO[attr] || {};
-    const formatter = new Intl.NumberFormat(this.hass.language);
+    const formatter = new Intl.NumberFormat(this.hass.language, { maximumFractionDigits: 1 });
     return html` ${uom ? formatter.format(state) : state} ${uom ? this.getUnit(unit) : ""} `;
   }
 
