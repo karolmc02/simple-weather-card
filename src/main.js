@@ -1,7 +1,7 @@
-import WeatherEntity from "./weather";
-import style from "./style";
-import { handleClick } from "./handleClick";
 import { customElement } from "lit/decorators.js";
+import { handleClick } from "./handleClick";
+import style from "./style";
+import WeatherEntity from "./weather";
 
 const LitElement =
   window.LitElement ||
@@ -204,8 +204,8 @@ class SimpleWeatherCard extends LitElement {
       this.custom[attr] && this.custom[attr].unit
         ? this.custom[attr]
         : INFO[attr] || {};
-
-    return html` ${state} ${uom ? this.getUnit(unit) : ""} `;
+    const formatter = new Intl.NumberFormat(this.hass.language);
+    return html` ${uom ? formatter.format(state) : state} ${uom ? this.getUnit(unit) : ""} `;
   }
 
   handleTap() {
